@@ -1,0 +1,20 @@
+Index:
+
+- Cálculo_de_média        : Programa de código de média de valores introduzidos
+- PORTUGOL_EXERCÍCIO1 	  : Programa de adição de 2 introduzidos
+- PORTUGOL_EXERCÍCIO2 	  : Programa de cálculo de incremento de salário
+- PORTUGOL_EXERCÍCIO4  	  : Programa de cálculo do IMC e impressão da faixa com ifs
+- PORTUGOL_EXERCÍCIO5	  : Programa de calcular o frete com base em localidade
+- PORTUGOL_EXERCÍCIO6	  : Exercício 5 mas com escolha e casos
+- PORTUGOL_EXERCÍCIO6-TSE : Exercício 6 mas estruturado
+- PORTUGOL_EXERCÍCIO7 	  : Programa de cálculo de valor corrigido utilizando loop para
+- PORTUGOL_EXERCÍCIO8     : Programa de cálculo do restantes salário após retirarem boletos, questionar se tem mais boletos
+- PORTUGOL_EXERCÍCIO9     : Exercício anterior mas os boletos são um array
+- PORTUGOL_EXERCÍCIO11    : Programa de abertura de um arquivo
+- PORTUGOL_EXERCÍCIO12    : Programa de leitura de uma linha do arquivo
+- PORTUGOL_EXERCÍCIO13    : Programa de leitura e contagem das linhas do arquivo
+- PORTUGOL_EXERCÍCIO14    : Programa de escrita da linha que contem o codigo introduzido
+- PORTUGOL_EXERCÍCIO14-A  : Exercício 14, mas retorna mensagem se não encontrar o codigo
+- PORTUGOL_EXERCÍCIO14-B  : Exercício 14-A, mas retorna codigo, nome e email se encontrar o codigo no arquivo em formato vertical
+- PORTUGOL_EXERCÍCIO15    : Programa de cálculo do salário total, médio e numero de dados de um arquivo
+- PORTUGOL_EXERCÍCIO16    : Exercício 15 mas o output é também guardado num arquivo
