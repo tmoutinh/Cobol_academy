@@ -1,0 +1,33 @@
+//*---------------------------INDEX---------------------------          
+COMPCOB- COMPILADOR DE COBOL                                            
+EXEC001- EXECUTOR DO 1º PROGRAMA DE COBOL                               
+EXEC002- EXECUTOR DO 2º E 3º PROGRAMA DE COBOL                          
+EXEC004- EXECUTOR DO 4º, 5º E 6º PROGRAMA DE COBOL                      
+EXEC007- EXECUTOR DO 7º PROGRAMA DE COBOL                               
+EXEC008- EXECUTOR DO 8º PROGRAMA DE COBOL                               
+EXEC009- EXECUTOR DO 9º PROGRAMA DE COBOL                               
+EXEC010- EXECUTOR DO 10º PROGRAMA DE COBOL                              
+EXEC011- EXECUTOR DO 11º PROGRAMA DE COBOL                              
+EXEC012- EXECUTOR DO 12º PROGRAMA DE COBOL                              
+EXER01 - FIRST JCL                                                      
+EXER02 - DEFINING JOBS AND 2 STEPS                                      
+EXER03 - USING IKJEFT01 TO RUN CMDS AND INTRODUCTION TO CARDS           
+EXER04 - INTRODUCING DD CARD                                            
+EXER05 - USING THE SYSIN CARD TO INPUT TO AN EXER                       
+EXER05A - JOB TO RUN 2 JOBS IN 2 STEPS                                  
+EXERO6 - JOB TO CREATE A SEQUENCIAL FILES WITH 80 BYTES                 
+EXER06A - JOB TO CREATE A SEQUENCIAL FILES WITH 37 BYTES                
+EXER07 - JOB TO DELETE EXISTING FILE                                    
+EXER08 - JOB TO DELETE FILE IF EXISTS THEN CREATE                       
+EXER09 - JOB TO CREATE A PARTITION                                      
+EXER10 - JOB TO CONCATENATE TWO SEQUENCIAL FILES IN SYSOUT              
+EXER10A - JOB TO CONCATENATE TWO SEQUENCIAL FILES IN NEW SEQUENCIAL     
+EXER10B - JOB TO DO THE SAME AS EXER10A BUT WITH ICEGENER               
+EXER11 - JOB TO EXECUTE PROGRAM WITH CONDITIONALS                       
+EXER12 - JOB TO EXECUTE PROGRAM WITH IF STATEMENT                       
+EXER12A - JOB TO CONCATENATE FILES AND CREATE NEW GENERATION DATA GROUPS
+EXER13 - JOB TO EXECUTE PROCEDURE TO EXECUTE PROGRAM
+EXER13A - JOB TO EXECUTE PROCEDURE TO CREATE PS PASSING 3 PARAMS
+EXER14 - JOB TO EXECUTE PROCEDURE TO CREATE PS PASSING NAME     
+GDGBASE - JOB TO CREATE THE BASE OF GDB WITH IDCAMS             
+JCL01 - INPUT TEXT FOR AN EXERCISE                              

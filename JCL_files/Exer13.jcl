@@ -1,0 +1,4 @@
+//TRUTTXX1 JOB 'EXER 1',CLASS=A,NOTIFY=TRUTT    
+//*---------------                              
+//PROCLIB  JCLLIB ORDER=TRUIP.TRAING00.JCLLIB   
+//STEP1    EXEC PROCBASE,PROG='EXER1'   

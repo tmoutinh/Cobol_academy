@@ -1,0 +1,2 @@
+//TRUTTXXX  JOB 'EXER 1',CLASS=A,NOTIFY=&SYSUID,TIME=(0,05)
+//STEP1    EXEC PGM=IEFBR14                                

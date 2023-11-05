@@ -1,0 +1,5 @@
+//TRUTTXXX  JOB 'EXEC011',CLASS=A,NOTIFY=&SYSUID,TIME=(0,10)
+//STEP01    EXEC PGM=COB011                                 
+//STEPLIB   DD   DSN=TRUTT.TRAING00.LINKLIB,DISP=SHR        
+//SYSIN     DD   *                                          
+10235TIAGO TEIXEIRA THIS IS FIPROGRAMADOR    THIS IS IL     
