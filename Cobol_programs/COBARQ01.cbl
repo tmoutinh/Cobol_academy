@@ -1,0 +1,63 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    COBARQ01.cbl                                       :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: Invalid date        by ===========       #+#    #+#              #
+#    Updated: 2023/11/12 16:36:21 by tmoutinh         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+       INPUT-OUTPUT                              SECTION.               00083101
+       FILE-CONTROL.                                                    00083201
+           SELECT CLS ASSIGN TO CLIENTES                                00083301
+           FILE STATUS IS WRK-FS-CLIENTES.                              00083401
+      *                                                                 00084001
+       DATA                                     DIVISION.               00085001
+       FILE                                      SECTION.               00085101
+       FD CLS                                                           00085201
+           RECORDING MODE IS F                                          00085301
+           RECORD CONTAINS 47 CHARACTERS                                00085401
+           BLOCK CONTAINS 0 RECORDS.                                    00085501
+       01 REG-CLIENTES            PIC X(47).                            00085601
+       WORKING-STORAGE                           SECTION.               00086001
+       77 WRK-FS-CLIENTES         PIC X(02) VALUE ZEROS.                00086101
+                                                                        00086201
+      ****************************************************              00089001
+      ****************************************************              00090001
+       PROCEDURE                                DIVISION.               00091001
+                                                                        00100001
+       0001-PRINCIPAL                            SECTION.               00101001
+           PERFORM 0100-INICIALIZAR.                                    00102001
+           IF WRK-FS-CLIENTES EQUAL "00"                                00102101
+              PERFORM 0200-PROCESSAR                                    00102201
+              PERFORM 0300-FINALIZAR                                    00102301
+           ELSE                                                         00102401
+              DISPLAY "JUMP OFF"                                        00102501
+           END-IF.                                                      00102601
+           STOP RUN.                                                    00103001
+       0001-FIM-PRINCIPAL. EXIT.                                        00104001
+      **************************************************                00105001
+       0100-INICIALIZAR                          SECTION.               00106001
+           OPEN INPUT CLS.                                              00107001
+           IF WRK-FS-CLIENTES EQUAL "00"                                00107101
+              DISPLAY "ARQUIVO ABERTO"                                  00107201
+           ELSE                                                         00107301
+              DISPLAY "ERRO NA ABERTURA - STATUS " WRK-FS-CLIENTES      00107401
+           END-IF.                                                      00107501
+       0100-INICIALIZAR-FIM.  EXIT.                                     00108001
+      **************************************************                00109001
+       0200-PROCESSAR                            SECTION.               00110001
+       0200-PROCESSAR-FIM.    EXIT.                                     00130001
+      **************************************************                00140001
+       0300-FINALIZAR                            SECTION.               00150001
+           CLOSE CLS.                                                   00151001
+           IF WRK-FS-CLIENTES EQUAL "00"                                00152001
+              DISPLAY "ARQUIVO FECHADO"                                 00153001
+           ELSE                                                         00154001
+              DISPLAY "ERRO NO FECHAMENTO - STATUS " WRK-FS-CLIENTES    00155001
+           END-IF.                                                      00156001
+       0300-FINALIZAR-FIM.    EXIT.                                     00170001
+      **************************************************                00180001
