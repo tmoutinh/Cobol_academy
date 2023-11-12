@@ -1,15 +1,15 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    COBARQ01.cbl                                       :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: Invalid date        by ===========       #+#    #+#              #
-#    Updated: 2023/11/12 16:36:21 by tmoutinh         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
+       IDENTIFICATION                            DIVISION.              00010001
+       PROGRAM-ID.   COBARQ01.                                          00020001
+      *==========================================                       00030001
+      *  AUTOR: TRUTT                                                   00040001
+      *  OBJETIVO: PROGRAMA DE ABERTURA E                               00050001
+      *         FECHAMETO DE ARQUIVOS                                   00051001
+      *  DATA: 07/11/2023                                               00060001
+      *==========================================                       00070001
+       ENVIRONMENT                              DIVISION.               00080001
+       CONFIGURATION                             SECTION.               00081001
+       SPECIAL-NAMES.                                                   00082001
+            DECIMAL-POINT IS COMMA.                                     00083001
        INPUT-OUTPUT                              SECTION.               00083101
        FILE-CONTROL.                                                    00083201
            SELECT CLS ASSIGN TO CLIENTES                                00083301
@@ -61,3 +61,4 @@
            END-IF.                                                      00156001
        0300-FINALIZAR-FIM.    EXIT.                                     00170001
       **************************************************                00180001
+

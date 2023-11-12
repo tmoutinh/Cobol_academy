@@ -1,15 +1,15 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    COBARQ04.cbl                                       :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: tmoutinh <tmoutinh@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: Invalid date        by ===========       #+#    #+#              #
-#    Updated: 2023/11/12 16:37:19 by tmoutinh         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
+       IDENTIFICATION                            DIVISION.              00010000
+       PROGRAM-ID.   COBARQ04.                                          00020000
+      *==========================================                       00030000
+      *  AUTOR: TRUTT                                                   00040000
+      *  OBJETIVO: PROGRAMA DE ABERTURA E                               00050000
+      *         FECHAMETO DE ARQUIVOS                                   00051000
+      *  DATA: 08/11/2023                                               00052000
+      *==========================================                       00053000
+       ENVIRONMENT                              DIVISION.               00054000
+       CONFIGURATION                             SECTION.               00055000
+       SPECIAL-NAMES.                                                   00056000
+            DECIMAL-POINT IS COMMA.                                     00057000
        INPUT-OUTPUT                              SECTION.               00058000
        FILE-CONTROL.                                                    00059000
            SELECT EAR ASSIGN TO EARQ0811                                00060000
@@ -21,28 +21,31 @@
            RECORDING MODE IS F                                          00084000
            RECORD CONTAINS 48 CHARACTERS                                00085000
            BLOCK CONTAINS 0 RECORDS.                                    00085100
-       01 REG-EARQ0811.                                                 00085200
-          05 REG-AGENCIA    PIC 9(04).                                  00085300
-          05 REG-CONTA      PIC 9(05).                                  00085400
-          05 REG-NOME       PIC X(30).                                  00085500
-          05 REG-SALDO      PIC 9(06)V99.                               00085600
-          05 REG-NIVEL      PIC X(01).                                  00085700
-       WORKING-STORAGE                           SECTION.               00085800
-       77 WRK-FS-EARQ0811         PIC X(02) VALUE ZEROS.                00085900
-       77 WRK-CONTADOR            PIC 9(10) COMP VALUE 0.               00086000
-       77 WRK-COUNT-PREM          PIC 9(10) COMP VALUE 0.               00086100
-       77 WRK-SALDO-PREM          PIC 9(10) COMP VALUE 0.               00086200
-       77 WRK-SALDO-IDE           PIC -ZZZ.ZZ9,99.                      00086300
-       77 WRK-CONTADOR-IDE        PIC -Z.ZZZ.ZZZ.ZZ9.                   00086400
-      ****************************************************              00086500
-      ****************************************************              00086600
-       PROCEDURE                                DIVISION.               00086700
-                                                                        00086800
-       0001-PRINCIPAL                            SECTION.               00086900
-           PERFORM 0100-INICIALIZAR.                                    00087000
-           PERFORM 0200-PROCESSAR UNTIL WRK-FS-EARQ0811 EQUAL "10".     00087100
-           PERFORM 0210-ESTATISTICA.                                    00087200
-           PERFORM 0300-FINALIZAR.                                      00087300
+                                                                        00085203
+       COPY "BOOK0811".                                                 00085304
+      *01 REG-EARQ0811.                                                 00085404
+      *   05 REG-AGENCIA    PIC 9(04).                                  00085504
+      *   05 REG-CONTA      PIC 9(05).                                  00085604
+      *   05 REG-NOME       PIC X(30).                                  00085704
+      *   05 REG-SALDO      PIC 9(06)V99.                               00085804
+      *   05 REG-NIVEL      PIC X(01).                                  00085904
+                                                                        00086003
+       WORKING-STORAGE                           SECTION.               00086100
+       77 WRK-FS-EARQ0811         PIC X(02) VALUE ZEROS.                00086200
+       77 WRK-CONTADOR            PIC 9(10) COMP VALUE 0.               00086300
+       77 WRK-COUNT-PREM          PIC 9(10) COMP VALUE 0.               00086400
+       77 WRK-SALDO-PREM          PIC 9(10) COMP VALUE 0.               00086500
+       77 WRK-SALDO-IDE           PIC -ZZZ.ZZ9,99.                      00086600
+       77 WRK-CONTADOR-IDE        PIC -Z.ZZZ.ZZZ.ZZ9.                   00086700
+      ****************************************************              00086800
+      ****************************************************              00086900
+       PROCEDURE                                DIVISION.               00087000
+                                                                        00087100
+       0001-PRINCIPAL                            SECTION.               00087200
+           PERFORM 0100-INICIALIZAR.                                    00087300
+           PERFORM 0200-PROCESSAR UNTIL WRK-FS-EARQ0811 EQUAL "10".     00087400
+           PERFORM 0210-ESTATISTICA.                                    00087500
+           PERFORM 0300-FINALIZAR.                                      00087600
            STOP RUN.                                                    00088000
        0001-FIM-PRINCIPAL. EXIT.                                        00089000
       **************************************************                00090000
@@ -98,3 +101,4 @@
            END-IF.                                                      00110500
        0300-FINALIZAR-FIM.    EXIT.                                     00111000
       **************************************************                00120000
+
