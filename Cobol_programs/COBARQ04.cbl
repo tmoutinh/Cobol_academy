@@ -1,4 +1,4 @@
-       IDENTIFICATION                            DIVISION.              00010000
+       IDENTIFICATION                           DIVISION.               00010006
        PROGRAM-ID.   COBARQ04.                                          00020000
       *==========================================                       00030000
       *  AUTOR: TRUTT                                                   00040000
@@ -52,47 +52,47 @@
        0100-INICIALIZAR                          SECTION.               00100000
            OPEN INPUT EAR.                                              00101000
            IF WRK-FS-EARQ0811 NOT EQUAL "00"                            00102000
-              DISPLAY "ERRO NA ABERTURA - STATUS " WRK-FS-EARQ0811      00103000
-              STOP RUN                                                  00104000
+             DISPLAY "ERRO NA ABERTURA - STATUS " WRK-FS-EARQ0811       00103006
+             STOP RUN                                                   00104006
            ELSE                                                         00105000
-              READ EAR                                                  00106000
-              IF WRK-FS-EARQ0811 EQUAL "10"                             00106100
-                 DISPLAY "ARQUIVO VAZIO"                                00106200
-              END-IF                                                    00106300
+             READ EAR                                                   00106006
+             IF WRK-FS-EARQ0811 EQUAL "10"                              00106106
+               DISPLAY "ARQUIVO VAZIO"                                  00106206
+             END-IF                                                     00106306
            END-IF.                                                      00106400
        0100-INICIALIZAR-FIM.  EXIT.                                     00106500
       **************************************************                00106600
        0200-PROCESSAR                            SECTION.               00106700
-           ADD 1 TO WRK-CONTADOR.                                       00106900
+           ADD 1               TO WRK-CONTADOR.                         00106906
            IF REG-NIVEL EQUAL "P"                                       00107001
-              MOVE REG-SALDO TO WRK-SALDO-IDE                           00107101
-              DISPLAY "***********************************"             00107201
-              DISPLAY "AGENCIA : " REG-AGENCIA                          00107301
-              DISPLAY "CONTA   : " REG-CONTA                            00107401
-              DISPLAY "NOME    : " REG-NOME                             00107501
-              DISPLAY "SALDO   : " WRK-SALDO-IDE                        00107601
-              DISPLAY "***********************************"             00107701
-              PERFORM 0220-PREMIUM                                      00107801
+             MOVE REG-SALDO    TO WRK-SALDO-IDE                         00107106
+             DISPLAY "***********************************"              00107206
+             DISPLAY "AGENCIA : " REG-AGENCIA                           00107306
+             DISPLAY "CONTA   : " REG-CONTA                             00107406
+             DISPLAY "NOME    : " REG-NOME                              00107506
+             DISPLAY "SALDO   : " WRK-SALDO-IDE                         00107606
+             DISPLAY "***********************************"              00107706
+             PERFORM 0220-PREMIUM                                       00107806
            END-IF.                                                      00107901
            READ EAR.                                                    00108000
        0200-PROCESSAR-FIM.    EXIT.                                     00108100
       **************************************************                00108200
        0210-ESTATISTICA                          SECTION.               00108300
-              MOVE WRK-CONTADOR TO WRK-CONTADOR-IDE.                    00108400
-              DISPLAY "FORAM LIDOS :"                                   00108500
-                  WRK-CONTADOR-IDE " REGISTOS".                         00108602
-              MOVE WRK-COUNT-PREM TO WRK-CONTADOR-IDE.                  00108700
-              DISPLAY "NUMERO DE PREMIUM LIDOS : "                      00108800
-                 WRK-CONTADOR-IDE.                                      00108900
-              MOVE WRK-SALDO-PREM TO WRK-SALDO-IDE.                     00109000
-              DISPLAY "SALDO PREMIUM TOTAL : "                          00109100
-                 WRK-SALDO-IDE.                                         00109200
-       0210-FINALIZAR-FIM.    EXIT.                                     00109300
+           MOVE WRK-CONTADOR   TO WRK-CONTADOR-IDE.                     00108406
+           DISPLAY "FORAM LIDOS :"                                      00108506
+                   WRK-CONTADOR-IDE " REGISTOS".                        00108606
+           MOVE WRK-COUNT-PREM TO WRK-CONTADOR-IDE.                     00108706
+           DISPLAY "NUMERO DE PREMIUM LIDOS : "                         00108806
+                   WRK-CONTADOR-IDE.                                    00108906
+           MOVE WRK-SALDO-PREM TO WRK-SALDO-IDE.                        00109006
+           DISPLAY "SALDO PREMIUM TOTAL : "                             00109106
+                   WRK-SALDO-IDE.                                       00109206
+       0210-ESTATISTICA-FIM.    EXIT.                                   00109305
       **************************************************                00109400
        0220-PREMIUM                              SECTION.               00109500
-           ADD 1 TO WRK-COUNT-PREM.                                     00109701
-           ADD REG-SALDO TO WRK-SALDO-PREM.                             00109801
-       0220-PREMIUM-FIM.    EXIT.                                       00109900
+           ADD 1               TO WRK-COUNT-PREM.                       00109706
+           ADD REG-SALDO       TO WRK-SALDO-PREM.                       00109806
+       0220-PREMIUM-FIM.      EXIT.                                     00109906
       **************************************************                00110000
        0300-FINALIZAR                            SECTION.               00110100
            CLOSE EAR.                                                   00110200
