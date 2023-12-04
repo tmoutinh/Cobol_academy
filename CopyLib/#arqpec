@@ -1,0 +1,7 @@
+       01 REG-PECA.                                                     00010000
+          05 COD-PECA             PIC 9(05).                            00020000
+          05 ITEM-PECA            PIC X(30).                            00030000
+          05 QUANT-PECA           PIC 9(05).                            00040000
+          05 VUNIT-PECA           PIC 9(05)V99.                         00050000
+          05 FORN-PECA            PIC 9(03).                            00060000
+

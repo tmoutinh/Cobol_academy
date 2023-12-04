@@ -1,0 +1,36 @@
+      ******************************************************************
+      * DCLGEN TABLE(TRUTT.FUNC)                                       *
+      *        LIBRARY(TRUTT.TRAING00.COPYLIB(BOOKFUNC))               *
+      *        ACTION(REPLACE)                                         *
+      *        LANGUAGE(COBOL)                                         *
+      *        NAMES(DB2-)                                             *
+      *        STRUCTURE(REG-FUNC)                                     *
+      *        QUOTE                                                   *
+      *        COLSUFFIX(YES)                                          *
+      * ... IS THE DCLGEN COMMAND THAT MADE THE FOLLOWING STATEMENTS   *
+      ******************************************************************
+           EXEC SQL DECLARE TRUTT.FUNC TABLE
+           ( IDFUN                          INTEGER NOT NULL,
+             NOMEFUN                        CHAR(30) NOT NULL,
+             ENDERFUN                       CHAR(30) NOT NULL,
+             SALFUN                         DECIMAL(10, 2) NOT NULL,
+             DEPFUN                         DECIMAL(2, 0)
+           ) END-EXEC.
+      ******************************************************************
+      * COBOL DECLARATION FOR TABLE TRUTT.FUNC                         *
+      ******************************************************************
+       01  REG-FUNC.
+      *                       IDFUN
+           10 DB2-IDFUN            PIC S9(9) USAGE COMP.
+      *                       NOMEFUN
+           10 DB2-NOMEFUN          PIC X(30).
+      *                       ENDERFUN
+           10 DB2-ENDERFUN         PIC X(30).
+      *                       SALFUN
+           10 DB2-SALFUN           PIC S9(8)V9(2) USAGE COMP-3.
+      *                       DEPFUN
+           10 DB2-DEPFUN           PIC S9(2)V USAGE COMP-3.
+      ******************************************************************
+      * THE NUMBER OF COLUMNS DESCRIBED BY THIS DECLARATION IS 5       *
+      ******************************************************************
+

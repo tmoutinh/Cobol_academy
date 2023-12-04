@@ -1,0 +1,7 @@
+       01 REG-EARQ0811.                                                 00010000
+          05 REG-AGENCIA    PIC 9(04).                                  00020000
+          05 REG-CONTA      PIC 9(05).                                  00030000
+          05 REG-NOME       PIC X(30).                                  00040000
+          05 REG-SALDO      PIC 9(06)V99.                               00050000
+          05 REG-NIVEL      PIC X(01).                                  00060000
+

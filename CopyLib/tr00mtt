@@ -1,0 +1,49 @@
+       01  CURSOMAI.
+           02  FILLER PIC X(12).
+           02  CODIGOL    COMP  PIC  S9(4).
+           02  CODIGOF    PICTURE X.
+           02  FILLER REDEFINES CODIGOF.
+             03 CODIGOA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  CODIGOI  PIC 9(3).
+           02  NOMEL    COMP  PIC  S9(4).
+           02  NOMEF    PICTURE X.
+           02  FILLER REDEFINES NOMEF.
+             03 NOMEA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  NOMEI  PIC X(20).
+           02  FILLER PIC X.
+           02  EMAILL    COMP  PIC  S9(4).
+           02  EMAILF    PICTURE X.
+           02  FILLER REDEFINES EMAILF.
+             03 EMAILA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  EMAILI  PIC X(20).
+           02  FILLER PIC X.
+           02  MSGL    COMP  PIC  S9(4).
+           02  MSGF    PICTURE X.
+           02  FILLER REDEFINES MSGF.
+             03 MSGA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  MSGI  PIC X(40).
+       01  CURSOMAO REDEFINES CURSOMAI.
+           02  FILLER PIC X(12).
+           02  FILLER PICTURE X(3).
+           02  CODIGOC    PICTURE X.
+           02  CODIGOH    PICTURE X.
+           02  CODIGOO  PIC X(3).
+           02  FILLER PICTURE X(3).
+           02  NOMEC    PICTURE X.
+           02  NOMEH    PICTURE X.
+           02  NOMEO  PIC X(20).
+           02  FILLER PIC X.
+           02  FILLER PICTURE X(3).
+           02  EMAILC    PICTURE X.
+           02  EMAILH    PICTURE X.
+           02  EMAILO  PIC X(20).
+           02  FILLER PIC X.
+           02  FILLER PICTURE X(3).
+           02  MSGC    PICTURE X.
+           02  MSGH    PICTURE X.
+           02  MSGO  PIC X(40).
+
