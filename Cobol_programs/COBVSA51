@@ -1,0 +1,237 @@
+       IDENTIFICATION                           DIVISION.               00010003
+       PROGRAM-ID.   COBVSA51.                                          00020003
+      *==========================================                       00030003
+      *  AUTOR: TRUTT                                                   00040003
+      *  OBJETIVO: PROGRAMA DE ABERTURA E FECHAMETO DE ARQUIVOS VSAM    00050003
+      *           COM MOSTRA NO SYSOUT DO RELATORIO                     00051003
+      *  DATA: 06/12/2023                                               00052003
+      *==========================================                       00053003
+       ENVIRONMENT                              DIVISION.               00054003
+       CONFIGURATION                             SECTION.               00055003
+       SPECIAL-NAMES.                                                   00056003
+            DECIMAL-POINT IS COMMA.                                     00057003
+       INPUT-OUTPUT                              SECTION.               00058003
+       FILE-CONTROL.                                                    00059003
+            SELECT AQL ASSIGN TO ARQCLI                                 00059103
+            ORGANIZATION  IS INDEXED                                    00059203
+            ACCESS MODE   IS SEQUENTIAL                                 00059303
+            RECORD KEY    IS REG-ARQCLI-CHAVE                           00059403
+            FILE STATUS   IS WRK-FS-ARQCLI.                             00059503
+                                                                        00059603
+            SELECT SAR ASSIGN TO ARQREL                                 00059703
+            FILE STATUS IS WRK-FS-SAR.                                  00059803
+      *                                                                 00059903
+       DATA                                     DIVISION.               00060003
+       FILE                                      SECTION.               00060103
+       FD AQL.                                                          00060203
+       01 REG-ARQCLI.                                                   00060303
+          05 REG-ARQCLI-CHAVE.                                          00060403
+             10 REG-ARQCLI-AGENC  PIC X(04).                            00060503
+             10 REG-ARQCLI-CONTA  PIC X(05).                            00060603
+          05 REG-ARQCLI-NOME      PIC X(30).                            00060703
+          05 REG-ARQCLI-SALDO     PIC 9(06)V99.                         00060803
+                                                                        00060903
+       FD SAR                                                           00061003
+           RECORDING MODE IS F.                                         00062003
+       01 REG-SAR                 PIC X(79).                            00063003
+      *                                                                 00064003
+       WORKING-STORAGE                           SECTION.               00065003
+      *------------- VARIAVEIS DE LAYOUT ---------------                00066003
+       01 WRK-REGISTRO.                                                 00067003
+          05 FILLER               PIC X(08) VALUE SPACES.               00068003
+          05 WRK-CONTA            PIC 9(05).                            00069003
+          05 FILLER               PIC X(08) VALUE SPACES.               00070003
+          05 WRK-NOME             PIC X(30).                            00080003
+          05 FILLER               PIC X(10) VALUE SPACES.               00081003
+          05 WRK-SALDO            PIC ZZZ.ZZ9,99.                       00082003
+                                                                        00083003
+       01 WRK-HEADER.                                                   00084003
+          05 FILLER               PIC X(11) VALUE SPACES.               00085003
+          05 WRK-HEADER-TITLE     PIC X(53) VALUE                       00086003
+             "RELATORIO DA NATIXIS DE TODAS AS CONTAS PARA AGENCIA ".   00087003
+          05 WRK-HEADER1-PAGINA   PIC 9(04) VALUE 0.                    00087103
+                                                                        00087203
+       01 WRK-HEADER1.                                                  00087303
+          05 FILLER               PIC X(08) VALUE SPACES.               00087403
+          05 FILLER               PIC X(13) VALUE "CONTA".              00087505
+          05 FILLER               PIC X(43) VALUE "NOME".               00087705
+          05 FILLER               PIC X(7)  VALUE "SALDO".              00087903
+                                                                        00088003
+       01 WRK-PAGINA-LAY.                                               00088103
+          05 FILLER               PIC X(69) VALUE SPACES.               00088203
+          05 FILLER               PIC X(07) VALUE "PAGINA ".            00088303
+          05 WRK-PAGINA-IDE       PIC ZZ9.                              00088403
+                                                                        00088503
+       01 WRK-SUBTOT-LAY.                                               00088603
+          05 FILLER               PIC X(33) VALUE SPACES.               00088703
+          05 FILLER               PIC X(25) VALUE                       00088803
+             "SUB-TOTAL .............  ".                               00088903
+          05 WRK-SUBTOT-IDE       PIC -Z.ZZZ.ZZ9,99.                    00089003
+                                                                        00089103
+       01 WRK-TOTAGEN-LAY.                                              00089203
+          05 FILLER               PIC X(33) VALUE SPACES.               00089303
+          05 FILLER               PIC X(17) VALUE                       00089403
+             "TOTAL DA AGENCIA ".                                       00089503
+          05 WRK-AGEN             PIC X(05) VALUE ZEROS.                00089603
+          05 FILLER               PIC X(03) VALUE ".  ".                00089703
+          05 WRK-TOTAGEN-IDE      PIC -Z.ZZZ.ZZ9,99.                    00089803
+                                                                        00089903
+       01 WRK-TOT-LAY.                                                  00090003
+          05 FILLER               PIC X(33) VALUE SPACES.               00090103
+          05 FILLER               PIC X(24) VALUE                       00090203
+             "TOTAL DE TODAS AGENCIAS ".                                00090303
+          05 WRK-TOT-IDE          PIC ZZ.ZZZ.ZZ9,99.                    00090403
+                                                                        00090503
+       01 WRK-LINE.               PIC X(79) VALUE ALL "-".              00090705
+                                                                        00091205
+       01 WRK-SPACES              PIC X(79) VALUE SPACES.               00091305
+                                                                        00091403
+      *-------------- VARIAVEIS DE WORK ----------------                00091503
+                                                                        00091603
+       77 WRK-FS-SAR              PIC X(02) VALUE ZEROS.                00091703
+       77 WRK-FS-ARQCLI           PIC X(02) VALUE ZEROS.                00091803
+       77 WRK-PAGINA              PIC 9(04) VALUE ZEROS.                00091903
+       77 WRK-ARQCLI-AGENC        PIC X(04) VALUE ZEROS.                00092003
+       77 WRK-ACUM-LINHAS         PIC 9(02) COMP VALUE 0.               00092105
+       77 WRK-CONTADOR            PIC 9(10) COMP VALUE 0.               00092203
+       77 WRK-ACUM-SALDO          PIC 9(07)V99 COMP VALUE ZEROS.        00092303
+       77 WRK-AGEN-SALDO          PIC 9(09)V99 COMP VALUE ZEROS.        00092403
+       77 WRK-TOT-SALDO           PIC 9(09)V99 COMP VALUE ZEROS.        00092503
+                                                                        00092603
+      *-------------- VARIAVEIS DE IDE  ----------------                00092703
+                                                                        00092803
+       77 WRK-CONTADOR-IDE        PIC -Z.ZZZ.ZZZ.ZZ9.                   00092903
+      ****************************************************              00093003
+       PROCEDURE                                DIVISION.               00093103
+                                                                        00093203
+       0001-PRINCIPAL                            SECTION.               00093303
+           PERFORM 0100-INICIALIZAR.                                    00093403
+           PERFORM 0200-PROCESSAR UNTIL WRK-FS-ARQCLI EQUAL "10".       00093503
+           PERFORM 0300-FINALIZAR.                                      00093603
+                                                                        00093705
+       0001-FIM-PRINCIPAL.    EXIT.                                     00093803
+      **************************************************                00093903
+       0100-INICIALIZAR                          SECTION.               00094003
+                                                                        00094103
+           OPEN INPUT AQL.                                              00094203
+           IF WRK-FS-ARQCLI NOT EQUAL "00"                              00094303
+             DISPLAY "ERRO NA ABERTURA - STATUS " WRK-FS-ARQCLI         00094403
+             STOP RUN                                                   00094503
+           END-IF.                                                      00094603
+           OPEN OUTPUT SAR.                                             00094703
+           IF WRK-FS-SAR NOT EQUAL "00"                                 00094803
+             DISPLAY "ERRO NA ABERTURA - STATUS " WRK-FS-SAR            00094903
+             STOP RUN                                                   00095003
+           END-IF.                                                      00095103
+           READ AQL                                                     00095203
+           IF WRK-FS-ARQCLI EQUAL "00"                                  00095303
+             MOVE REG-ARQCLI-AGENC TO WRK-ARQCLI-AGENC                  00095403
+           END-IF.                                                      00095503
+       0100-INICIALIZAR-FIM.  EXIT.                                     00095603
+      **************************************************                00095703
+       0200-PROCESSAR                            SECTION.               00095803
+           IF WRK-ACUM-LINHAS GREATER 5 OR WRK-ACUM-LINHAS EQUAL 0      00095903
+           OR REG-ARQCLI-AGENC NOT EQUAL WRK-ARQCLI-AGENC               00096003
+             PERFORM 0210-PRINT-HED                                     00096103
+           END-IF.                                                      00097003
+           MOVE REG-ARQCLI-CONTA   TO WRK-CONTA.                        00099004
+           MOVE REG-ARQCLI-NOME    TO WRK-NOME.                         00100004
+           MOVE REG-ARQCLI-SALDO   TO WRK-SALDO.                        00101004
+           MOVE WRK-REGISTRO       TO REG-SAR.                          00102004
+           WRITE REG-SAR.                                               00103003
+           IF WRK-FS-SAR NOT EQUAL "00"                                 00104003
+             DISPLAY "ERRO NA ESCRITA - STATUS " WRK-FS-SAR             00105003
+             STOP RUN                                                   00106003
+           END-IF.                                                      00107003
+           ADD  REG-ARQCLI-SALDO   TO WRK-ACUM-SALDO.                   00108004
+           ADD  1                  TO WRK-CONTADOR.                     00108104
+           ADD  1                  TO WRK-ACUM-LINHAS.                  00108204
+           READ AQL                                                     00108703
+           IF WRK-FS-ARQCLI EQUAL "10"                                  00108803
+             PERFORM 0205-ESTATISTICA                                   00108903
+           END-IF.                                                      00109003
+       0200-PROCESSAR-FIM.    EXIT.                                     00109103
+      ***************************************************               00109203
+       0205-ESTATISTICA                          SECTION.               00109303
+           PERFORM 0220-PRINT-SUBTOT.                                   00110003
+           PERFORM 0230-PRINT-AGENC.                                    00110103
+           ADD WRK-ACUM-SALDO      TO WRK-TOT-SALDO.                    00111004
+           MOVE WRK-TOT-SALDO      TO WRK-TOT-IDE.                      00111104
+           IF WRK-FS-SAR NOT EQUAL "00"                                 00111203
+             DISPLAY "ERRO NA ESCRITA - STATUS " WRK-FS-SAR             00111303
+             STOP RUN                                                   00111403
+           END-IF                                                       00111503
+           MOVE WRK-TOT-LAY        TO REG-SAR.                          00111604
+           WRITE REG-SAR AFTER 4 LINES.                                 00111703
+           MOVE WRK-LINE           TO REG-SAR.                          00111804
+           WRITE REG-SAR AFTER 4 LINES.                                 00111903
+           MOVE WRK-PAGINA-LAY     TO REG-SAR.                          00112004
+           WRITE REG-SAR AFTER 4 LINES.                                 00112103
+           MOVE WRK-CONTADOR       TO WRK-CONTADOR-IDE.                 00112204
+           DISPLAY "*=================================*".               00112303
+           DISPLAY "FORAM LIDOS :"                                      00112403
+               WRK-CONTADOR-IDE " REGISTOS".                            00112503
+       0205-ESTATISTICA-FIM.    EXIT.                                   00112603
+      **************************************************                00112703
+       0210-PRINT-HED                            SECTION.               00112803
+           IF WRK-ACUM-LINHAS GREATER 5                                 00112903
+             AND REG-ARQCLI-AGENC EQUAL WRK-ARQCLI-AGENC                00113004
+             PERFORM 0220-PRINT-SUBTOT                                  00113103
+             MOVE WRK-LINE         TO REG-SAR                           00114004
+             WRITE REG-SAR AFTER 4 LINES                                00114103
+             MOVE WRK-PAGINA-LAY TO REG-SAR                             00114203
+             WRITE REG-SAR AFTER 4 LINES                                00114303
+           END-IF.                                                      00114403
+           IF REG-ARQCLI-AGENC NOT EQUAL WRK-ARQCLI-AGENC               00114503
+             PERFORM 0220-PRINT-SUBTOT                                  00114703
+             PERFORM 0230-PRINT-AGENC                                   00114803
+             MOVE WRK-LINE         TO REG-SAR                           00114905
+             WRITE REG-SAR AFTER 4 LINES                                00115003
+             MOVE WRK-PAGINA-LAY   TO REG-SAR                           00115105
+             WRITE REG-SAR AFTER 4 LINES                                00115203
+           END-IF.                                                      00115303
+           ADD WRK-ACUM-SALDO      TO WRK-TOT-SALDO.                    00115404
+           MOVE 0                  TO WRK-ACUM-SALDO.                   00115504
+           MOVE 1                  TO WRK-ACUM-LINHAS.                  00115604
+           MOVE WRK-ARQCLI-AGENC   TO WRK-HEADER1-PAGINA.               00115704
+           MOVE WRK-HEADER         TO REG-SAR.                          00115804
+           WRITE REG-SAR AFTER PAGE.                                    00115903
+           MOVE WRK-LINE           TO REG-SAR.                          00116004
+           WRITE REG-SAR AFTER 4 LINES.                                 00116103
+           MOVE WRK-HEADER1 TO REG-SAR.                                 00116203
+           WRITE REG-SAR AFTER 4 LINES.                                 00116303
+           MOVE WRK-SPACES       TO REG-SAR.                            00116404
+           WRITE REG-SAR.                                               00116503
+       0210-PRINT-HED-FIM.    EXIT.                                     00116603
+      **************************************************                00116703
+       0220-PRINT-SUBTOT                         SECTION.               00116803
+           MOVE WRK-ACUM-SALDO     TO WRK-SUBTOT-IDE.                   00116904
+           ADD  WRK-ACUM-SALDO     TO WRK-AGEN-SALDO                    00117004
+           ADD 1                   TO WRK-PAGINA.                       00117104
+           MOVE WRK-PAGINA         TO WRK-PAGINA-IDE.                   00117204
+           MOVE WRK-SUBTOT-LAY     TO REG-SAR.                          00117304
+           WRITE REG-SAR AFTER 4 LINES.                                 00117403
+       0220-PRINT-SUBTOT-FIM.  EXIT.                                    00118303
+      **************************************************                00118403
+       0230-PRINT-AGENC                          SECTION.               00118503
+           MOVE WRK-AGEN-SALDO     TO WRK-TOTAGEN-IDE.                  00118604
+           MOVE WRK-ARQCLI-AGENC   TO WRK-AGEN.                         00118704
+           MOVE WRK-TOTAGEN-LAY    TO REG-SAR.                          00118804
+           WRITE REG-SAR.                                               00118903
+           MOVE 0                  TO WRK-AGEN-SALDO.                   00119004
+           MOVE REG-ARQCLI-AGENC   TO WRK-ARQCLI-AGENC.                 00119104
+       0230-PRINT-AGENC-FIM.   EXIT.                                    00119503
+      **************************************************                00119603
+       0300-FINALIZAR                            SECTION.               00119703
+           CLOSE AQL.                                                   00119803
+           IF WRK-FS-ARQCLI NOT EQUAL "00"                              00119903
+             DISPLAY "ERRO NO FECHAMENTO INPUT - STATUS " WRK-FS-ARQCLI 00120003
+           END-IF.                                                      00130003
+           CLOSE SAR.                                                   00140003
+           IF WRK-FS-SAR    NOT EQUAL "00"                              00150003
+             DISPLAY "ERRO NO FECHAMENTO OUTPUT - STATUS " WRK-FS-SAR   00160003
+           END-IF.                                                      00170003
+           GOBACK.                                                      00180003
+       0300-FINALIZAR-FIM.    EXIT.                                     00190003
+      **************************************************                00200003
+

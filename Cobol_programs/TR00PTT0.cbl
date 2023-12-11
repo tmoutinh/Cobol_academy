@@ -66,7 +66,7 @@
                WHEN 0
                  CONTINUE
                WHEN 100
-                 DISPLAY "FUNCIONARIO NÃO ENCONTRADO"
+                 DISPLAY "FUNCIONARIO NAO ENCONTRADO"
                WHEN OTHER
                  MOVE SQLCODE TO WRK-SQLCODE
                  DISPLAY "ERRO SQLCODE" WRK-SQLCODE

@@ -12,7 +12,7 @@
        01 MESES.                                                        00102000
           02 FILLER          PIC X(09) VALUE 'JANEIRO  '.               00103000
           02 FILLER          PIC X(09) VALUE 'FEVEREIRO'.               00104000
-          02 FILLER          PIC X(09) VALUE 'MARÇO    '.               00105000
+          02 FILLER          PIC X(09) VALUE 'MARCO    '.               00105000
           02 FILLER          PIC X(09) VALUE 'ABRIL    '.               00106000
           02 FILLER          PIC X(09) VALUE 'MAIO     '.               00107000
           02 FILLER          PIC X(09) VALUE 'JUNHO    '.               00108000
